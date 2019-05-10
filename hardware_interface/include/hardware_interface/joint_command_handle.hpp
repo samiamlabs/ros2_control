@@ -41,7 +41,9 @@ public:
   HARDWARE_INTERFACE_PUBLIC
   JointCommandHandle(
     const std::string & name,
-    double * cmd);
+    double * pos,
+    double * vel,
+    double * eff);
 
   HARDWARE_INTERFACE_PUBLIC
   const std::string &
@@ -49,15 +51,33 @@ public:
 
   HARDWARE_INTERFACE_PUBLIC
   double
-  get_cmd() const;
+  get_position() const;
+
+  HARDWARE_INTERFACE_PUBLIC
+  double
+  get_velocity() const;
+
+  HARDWARE_INTERFACE_PUBLIC
+  double
+  get_effort() const;
 
   HARDWARE_INTERFACE_PUBLIC
   void
-  set_cmd(double cmd);
+  set_position(double pos);
+
+  HARDWARE_INTERFACE_PUBLIC
+  void
+  set_velocity(double vel);
+
+  HARDWARE_INTERFACE_PUBLIC
+  void
+  set_effort(double );
 
 private:
   std::string name_;
-  double * cmd_;
+  double * pos_;
+  double * vel_;
+  double * eff_;
 };
 
 }  // namespace hardware_interface

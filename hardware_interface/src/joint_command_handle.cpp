@@ -24,15 +24,21 @@ namespace hardware_interface
 
 JointCommandHandle::JointCommandHandle()
 : name_(),
-  cmd_(nullptr)
+  pos_(nullptr),
+  vel_(nullptr),
+  eff_(nullptr)
 {}
 
 JointCommandHandle::JointCommandHandle(
   const std::string & name,
-  double * cmd)
-: name_(name), cmd_(cmd)
+  double * pos,
+  double * vel,
+  double * eff)
+: name_(name), pos_(pos), vel_(vel), eff_(eff)
 {
-  THROW_ON_NULLPTR(cmd)
+  THROW_ON_NULLPTR(pos)
+  THROW_ON_NULLPTR(vel)
+  THROW_ON_NULLPTR(eff)
 }
 
 const std::string &
@@ -42,17 +48,52 @@ JointCommandHandle::get_name() const
 }
 
 double
-JointCommandHandle::get_cmd() const
+JointCommandHandle::get_position() const
 {
-  return *cmd_;
+  THROW_ON_NULLPTR(pos_)
+
+  return *pos_;
 }
 
 void
-JointCommandHandle::set_cmd(double cmd)
+JointCommandHandle::set_position(double pos)
 {
-  THROW_ON_NULLPTR(cmd)
+  THROW_ON_NULLPTR(pos_)
 
-  * cmd_ = cmd;
+  * pos_ = pos;
 }
+
+double
+JointCommandHandle::get_velocity() const
+{
+  THROW_ON_NULLPTR(vel_)
+
+  return *vel_;
+}
+
+void
+JointCommandHandle::set_velocity(double vel)
+{
+  THROW_ON_NULLPTR(vel_)
+
+  * vel_ = vel;
+}
+
+double
+JointCommandHandle::get_effort() const
+{
+  THROW_ON_NULLPTR(eff_)
+
+  return *eff_;
+}
+
+void
+JointCommandHandle::set_effort(double eff)
+{
+  THROW_ON_NULLPTR(eff_)
+
+  * eff_ = eff;
+}
+
 
 }  // namespace hardware_interface
