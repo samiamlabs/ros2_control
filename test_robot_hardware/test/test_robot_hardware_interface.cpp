@@ -31,7 +31,9 @@ protected:
     joint_pos_values = {robot.pos1, robot.pos2, robot.pos3};
     joint_vel_values = {robot.vel1, robot.vel2, robot.vel3};
     joint_eff_values = {robot.eff1, robot.eff2, robot.eff3};
-    joint_cmd_values = {robot.cmd1, robot.cmd2, robot.cmd3};
+    joint_pos_cmd_values = {robot.pos_cmd1, robot.pos_cmd2, robot.pos_cmd3};
+    joint_vel_cmd_values = {robot.vel_cmd1, robot.vel_cmd2, robot.vel_cmd3};
+    joint_eff_cmd_values = {robot.eff_cmd1, robot.eff_cmd2, robot.eff_cmd3};
   }
 
   test_robot_hardware::TestRobotHardware robot;
@@ -40,7 +42,9 @@ protected:
   std::vector<double> joint_pos_values;
   std::vector<double> joint_vel_values;
   std::vector<double> joint_eff_values;
-  std::vector<double> joint_cmd_values;
+  std::vector<double> joint_pos_cmd_values;
+  std::vector<double> joint_vel_cmd_values;
+  std::vector<double> joint_eff_cmd_values;
 };
 
 TEST_F(TestRobotHardwareInterface, initialize) {
@@ -73,7 +77,9 @@ TEST_F(TestRobotHardwareInterface, get_registered_command_handles) {
     hardware_interface::JointCommandHandle * jcmd_ptr = nullptr;
     ret = robot.get_joint_command_handle(joint_names[i], &jcmd_ptr);
     EXPECT_EQ(hardware_interface::HW_RET_OK, ret);
-    EXPECT_EQ(joint_cmd_values[i], jcmd_ptr->get_cmd());
+    EXPECT_EQ(joint_pos_cmd_values[i], jcmd_ptr->get_position());
+    EXPECT_EQ(joint_vel_cmd_values[i], jcmd_ptr->get_velocity());
+    EXPECT_EQ(joint_eff_cmd_values[i], jcmd_ptr->get_effort());
     ret = hardware_interface::HW_RET_ERROR;
   }
 

@@ -51,21 +51,21 @@ TestRobotHardware::init()
     return ret;
   }
 
-  jcmd1 = hardware_interface::JointCommandHandle(joint_name1, &cmd1);
+  jcmd1 = hardware_interface::JointCommandHandle(joint_name1, &pos_cmd1, &vel_cmd1, &eff_cmd1);
   ret = register_joint_command_handle(&jcmd1);
   if (ret != hardware_interface::HW_RET_OK) {
     RCUTILS_LOG_WARN("can't register joint command handle %s", joint_name1.c_str());
     return ret;
   }
 
-  jcmd2 = hardware_interface::JointCommandHandle(joint_name2, &cmd2);
+  jcmd2 = hardware_interface::JointCommandHandle(joint_name2, &pos_cmd2, &vel_cmd2, &eff_cmd2);
   ret = register_joint_command_handle(&jcmd2);
   if (ret != hardware_interface::HW_RET_OK) {
     RCUTILS_LOG_WARN("can't register joint command handle %s", joint_name2.c_str());
     return ret;
   }
 
-  jcmd3 = hardware_interface::JointCommandHandle(joint_name3, &cmd3);
+  jcmd3 = hardware_interface::JointCommandHandle(joint_name3, &pos_cmd3, &vel_cmd3, &eff_cmd3);
   ret = register_joint_command_handle(&jcmd3);
   if (ret != hardware_interface::HW_RET_OK) {
     RCUTILS_LOG_WARN("can't register joint command handle %s", joint_name3.c_str());
@@ -116,9 +116,9 @@ TestRobotHardware::read()
 hardware_interface::hardware_interface_ret_t
 TestRobotHardware::write()
 {
-  pos1 = cmd1;
-  pos2 = cmd2;
-  pos3 = cmd3;
+  pos1 = pos_cmd1;
+  pos2 = pos_cmd2;
+  pos3 = pos_cmd3;
   return hardware_interface::HW_RET_OK;
 }
 

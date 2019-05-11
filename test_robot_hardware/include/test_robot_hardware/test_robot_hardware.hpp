@@ -62,9 +62,17 @@ public:
   double eff2 = 2.2;
   double eff3 = 3.3;
 
-  double cmd1 = 1.1;
-  double cmd2 = 2.2;
-  double cmd3 = 3.3;
+  double pos_cmd1 = 1.1;
+  double pos_cmd2 = 2.2;
+  double pos_cmd3 = 3.3;
+
+  double vel_cmd1 = 1.1;
+  double vel_cmd2 = 2.2;
+  double vel_cmd3 = 3.3;
+
+  double eff_cmd1 = 1.1;
+  double eff_cmd2 = 2.2;
+  double eff_cmd3 = 3.3;
 
   bool read1 = false;
   bool read2 = false;
